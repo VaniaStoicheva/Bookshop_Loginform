@@ -2,7 +2,7 @@
  session_start();
 $title='Регистрация';
 include 'include/header.php';
-
+require 'include/password.php';
 if(isset($_POST)&& isset($_POST['username']) && isset($_POST['pass'])){
 
     $username=trim($_POST['username']);
@@ -25,8 +25,10 @@ if(isset($_POST)&& isset($_POST['username']) && isset($_POST['pass'])){
             echo '<p>Има потребител с това име въведете друго име!</p>';
         }else{
         $pass=mysqli_real_escape_string($link,$pass);
+        $hash_pass=  password_hash($pass,PASSWORD_BCRYPT);
+        
         $q=  mysqli_query($link,
-                'INSERT INTO users (username,pass) VALUE ("'.$username.'","'.$pass.'")');
+                'INSERT INTO users (username,pass) VALUE ("'.$username.'","'.$hash_pass.'")');
         if(mysqli_error($link)){
             echo mysqli_error($link);
         }

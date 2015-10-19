@@ -2,6 +2,7 @@
  session_start();
 $title='Вход';
 include 'include/header.php';
+require 'include/password.php';
 
 if(isset($_GET)&& isset($_GET['username']) && isset($_GET['pass'])){
     
@@ -23,29 +24,31 @@ if(isset($_GET)&& isset($_GET['username']) && isset($_GET['pass'])){
         $pass=mysqli_real_escape_string($link,$pass);
         $username=  mysqli_real_escape_string($link,$username);
         $q=  mysqli_query($link,
-        'SELECT * FROM users WHERE username="'.$username.'" AND pass="'.$pass.'"');
+        'SELECT * FROM users WHERE username="'.$username.'"');
         if(mysqli_error($link)){
              echo mysqli_error($link);
                 }
         if(mysqli_num_rows($q)>0){
             $row=mysqli_fetch_assoc($q);
             $user_id=$row['user_id'];
-            
-        $_SESSION['user_id']=$user_id;
-        $_SESSION['isLoged']=true;
-        $_SESSION['username']=$username;
-         header('Location:index.php');
-         exit;
-        }
+            $pass_hash=$row['pass'];
+           
+            if(password_verify($pass, $pass_hash)){
+                  $_SESSION['user_id']=$user_id;
+                  $_SESSION['isLoged']=true;
+                  $_SESSION['username']=$username;
+                  header('Location:index.php');
+                  exit;   
+                }else{
+                    echo '<p>Грешна парола</p>';
+                }
       
-      if(!isUserExist($link, $username)){
-            echo '<p>Грешно име </p>';
-       } else{
-           echo '<p>Грешна парола </p>';
-       }
+        }else{
+      
+            echo '<p>Грешно потребителско име</p>';
     }
 }
-
+}
 ?>
 <form method="get">
     <div><label>Име:</label>

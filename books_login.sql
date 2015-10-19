@@ -135,21 +135,22 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` text NOT NULL,
   `counter` int(11) NOT NULL,
   PRIMARY KEY (`comments_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
 
 --
 -- Ссхема на данните от таблица `comments`
 --
 
 INSERT INTO `comments` (`user_id`, `book_id`, `comments_id`, `date_time`, `comment`, `counter`) VALUES
-(6, 1, 1, '2016-10-15 12:35:35', 'цветът на магията', 1),
-(6, 1, 2, '2016-10-15 12:36:10', 'цветът', 1),
-(6, 2, 3, '2016-10-15 12:36:33', 'властелина', 0),
-(6, 3, 4, '2016-10-15 12:36:47', 'добри поличби', 1),
-(6, 3, 5, '2016-10-15 12:44:35', 'добри поличби', 1),
-(1, 4, 10, '0000-00-00 00:00:00', 'фантазия', 0),
-(1, 5, 11, '0000-00-00 00:00:00', 'истории', 0),
-(1, 6, 12, '0000-00-00 00:00:00', 'приказки', 0);
+(3, 1, 1, '2016-10-15 12:35:35', 'цветът на магията', 1),
+(3, 1, 2, '2016-10-15 12:36:10', 'цветът', 1),
+(2, 2, 3, '2016-10-15 12:36:33', 'властелина', 0),
+(1, 3, 4, '2016-10-15 12:36:47', 'добри поличби', 1),
+(2, 3, 5, '2016-10-15 12:44:35', 'добри поличби', 1),
+(1, 5, 11, '2016-10-15 12:35:45', 'истории', 0),
+(1, 4, 10, '2016-10-15 12:35:40', 'фантазия', 0),
+(2, 2, 13, '2019-10-15 12:03:29', 'vlastelina', 1),
+(1, 6, 12, '2016-10-15 12:35:38', 'приказки', 0);
 
 -- --------------------------------------------------------
 
@@ -160,20 +161,18 @@ INSERT INTO `comments` (`user_id`, `book_id`, `comments_id`, `date_time`, `comme
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL,
-  `pass` varchar(50) NOT NULL,
+  `pass` varchar(80) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
 -- Ссхема на данните от таблица `users`
 --
 
 INSERT INTO `users` (`user_id`, `username`, `pass`) VALUES
-(1, 'vania', '123'),
-(6, 'vivas', '123'),
-(3, 'wanias', '0'),
-(4, 'cecostoi4ev', 'адсФГФДХГ'),
-(5, 'vanina133', '123');
+(1, 'admin', '$2y$10$jgDDzli2BG3gIl6TSvWIHe8F7bYL7qAlPoLITFUTxKSI.LGBbOriK'),
+(2, 'vania', '$2y$10$6M/L4b.O8KA8KkQhAZN7guohthVOHiqxwEjKEw9Ky57oZ7vM180eG'),
+(3, 'user1', '$2y$10$xAOimhnHREMmawukedkS6uy.cAkSfDPF8Lnf8wEQ70NwZFAc0qfHu');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
